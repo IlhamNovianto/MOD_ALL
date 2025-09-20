@@ -3,7 +3,7 @@ import 'package:manager_on_duty/Util/getVersion.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../LoginView/LoginView.dart';
+import '../ChoseBuilding/PilihBuilding.dart';
 
 class SplashScreenController extends GetxController {
   late SharedPreferences prefs;
@@ -39,7 +39,8 @@ class SplashScreenController extends GetxController {
     //SharedPreferences clearprefs = await SharedPreferences.getInstance();
 
     Future.delayed(const Duration(seconds: 3), () {
-      Get.off(const LoginPage());
+      Get.off(const Pilihbuilding());
+      // Get.off(const LoginPage());
     });
   }
 }

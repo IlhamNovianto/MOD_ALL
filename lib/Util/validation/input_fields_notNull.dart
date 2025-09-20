@@ -6,7 +6,8 @@ class InputTextFieldWidgetNotNull extends StatelessWidget {
   final TextEditingController textEditingController;
   final String hintText;
 
-  InputTextFieldWidgetNotNull(this.textEditingController, this.hintText);
+  const InputTextFieldWidgetNotNull(this.textEditingController, this.hintText,
+      {super.key});
   @override
   Widget build(BuildContext context) {
     return Container(

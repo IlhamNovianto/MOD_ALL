@@ -9,10 +9,10 @@ class InputTextFieldWidgetPassword extends StatefulWidget {
   final String hintText;
 
   const InputTextFieldWidgetPassword({
-    Key? key,
+    super.key,
     required this.textEditingController,
     required this.hintText,
-  }) : super(key: key);
+  });
 
   @override
   State<InputTextFieldWidgetPassword> createState() =>

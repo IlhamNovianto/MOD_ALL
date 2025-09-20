@@ -6,9 +6,9 @@ import 'package:get/get.dart';
 class InputTextFieldWidgetEmail extends StatelessWidget {
   final TextEditingController textEditingController;
   final String hintText;
-  
 
-  InputTextFieldWidgetEmail(this.textEditingController, this.hintText);
+  const InputTextFieldWidgetEmail(this.textEditingController, this.hintText,
+      {super.key});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,15 +17,13 @@ class InputTextFieldWidgetEmail extends StatelessWidget {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: textEditingController,
         decoration: InputDecoration(
-          labelText: hintText,
-          
+            labelText: hintText,
             border: OutlineInputBorder(),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.blue),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey)
-            ),
+            enabledBorder:
+                OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
             fillColor: Colors.white54,
             hintStyle: TextStyle(color: Colors.grey),
             contentPadding: EdgeInsets.all(8.0),
@@ -41,7 +39,4 @@ String? validateEmail(String? value) {
   } else {
     return 'Masukan email valid';
   }
-
 }
-
-

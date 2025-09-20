@@ -43,7 +43,8 @@ class _LoginPageState extends State<LoginPage> {
                             height: 420,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15.0),
-                                color: Color.fromARGB(221, 255, 255, 255)),
+                                color:
+                                    const Color.fromARGB(221, 255, 255, 255)),
                             child: SingleChildScrollView(
                               child: Column(
                                 children: [
