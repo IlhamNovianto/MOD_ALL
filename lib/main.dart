@@ -7,14 +7,11 @@ import 'package:manager_on_duty/View/SplashScreen/SplashScreen.dart';
 void main() async {
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
-    title: 'MOD App',
-    initialRoute: '/pilih-building', // route awal
+    initialRoute: '/pilih-building',
     getPages: [
       GetPage(name: '/pilih-building', page: () => const Pilihbuilding()),
       GetPage(
-          name: '/splash',
-          page: () => SplashScreen(
-              building: Get.arguments)), // nanti bisa dikirim building
+          name: '/splash', page: () => SplashScreen(building: Get.arguments)),
       GetPage(
           name: '/login',
           page: () => LoginPage(
@@ -23,8 +20,4 @@ void main() async {
       //GetPage(name: '/home', page: () => const HomePage()),
     ],
   ));
-  // (const GetMaterialApp(
-  //   debugShowCheckedModeBanner: false,
-  //   home: Pilihbuilding(),
-  // ));
 }

@@ -63,8 +63,6 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                     child: LoginWidget(),
                                   ),
-                                  // Pilih Ulang Building
-                                  Text(widget.login.baseUrl),
                                   Text(
                                       'Version.${splashScreenController.versionAPP}')
                                 ],

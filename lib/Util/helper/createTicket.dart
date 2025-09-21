@@ -11,11 +11,11 @@ Future<String> createTicketMod({String? userId}) async {
   return modTicket;
 }
 
-Future<String> createTicketBm({String? userId}) async {
+Future<String> createTicketBm({String? userIdBm}) async {
   Random random = Random();
   DateTime date = DateTime.now();
   String dateFormat = DateFormat('ddyy').format(date);
   int randomInt = random.nextInt(900000) + 000001;
-  String modTicket = ('BM/$userId/$dateFormat-$randomInt');
+  String modTicket = ('BM/$userIdBm/$dateFormat-$randomInt');
   return modTicket;
 }

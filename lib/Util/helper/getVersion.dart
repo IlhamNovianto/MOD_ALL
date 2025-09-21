@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:manager_on_duty/Util/Popup/GagalFunction.dart';
+import 'package:manager_on_duty/Util/Popup/error/GagalFunction.dart';
+import 'package:manager_on_duty/Util/Popup/warning/warning_out.dart';
 import 'package:manager_on_duty/Util/helper/check_conection.dart';
 import 'package:manager_on_duty/View/SplashScreen/SplashScreen_Controller.dart';
 
@@ -36,7 +36,9 @@ Future<void> getVersionApps({required String versionAPP}) async {
           SplashScreenController splashScreenController = Get.find();
           splashScreenController.redirectPage();
         } else {
-          updateWarning();
+          warningOut(
+              title: "Aplikasi Anda Belum Update",
+              massage: "Silahkan Hubungi IT, Untuk bantuan update");
         }
       }
     }
@@ -51,44 +53,4 @@ Future<void> getVersionApps({required String versionAPP}) async {
   } catch (e) {
     operationField(massageError: e.toString());
   }
-}
-
-//popup untuk menampilkan warning, agar mengupload foto ke SPV
-void updateWarning() async {
-  showDialog(
-      context: Get.context!,
-      builder: (context) {
-        return SimpleDialog(
-          title: Image.asset(
-            'images/icon_warning.png',
-            width: 50,
-            height: 50,
-          ),
-          contentPadding: const EdgeInsets.all(20),
-          children: [
-            const Center(
-              child: Text(
-                "Aplikasi Anda Belum Update",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-            ),
-            const Center(
-              child: Text(
-                "Silahkan Update dahulu",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 14),
-              ),
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              child: const Text('OK'),
-              onPressed: () {
-                exit(0);
-              },
-            ),
-          ],
-        );
-      });
 }

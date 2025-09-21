@@ -5,6 +5,7 @@ import 'package:manager_on_duty/View/SplashScreen/SplashScreen_Controller.dart';
 import '../../Config/Pilih Build/dataBuild.dart';
 
 class SplashScreen extends StatefulWidget {
+  //Contructor
   final LocationItem building;
   const SplashScreen({super.key, required this.building});
 
@@ -15,8 +16,6 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   SplashScreenController splashScreenController =
       Get.put(SplashScreenController());
-
-  // final PilihBuildingController buildingController = Get.find();
 
   @override
   Widget build(BuildContext context) {

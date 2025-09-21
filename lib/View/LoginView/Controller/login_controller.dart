@@ -1,11 +1,14 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:manager_on_duty/Service/api_endpoint.dart';
 import 'package:manager_on_duty/Util/Popup/CekKoneksi.dart';
-import 'package:manager_on_duty/Util/Popup/GagalFunction.dart';
+import 'package:manager_on_duty/Util/Popup/error/GagalFunction.dart';
+import 'package:manager_on_duty/Util/Popup/helperAuth.dart';
 import 'package:manager_on_duty/Util/helper/check_conection.dart';
 import 'package:manager_on_duty/View/LoginView/Model/login_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,8 +35,10 @@ class LoginController extends GetxController {
         var headers = {'Content-Type': 'application/json'};
         var url = Uri.parse(connectionResult + ApiEndPoints.modLogin.getToken);
         final body = {"userId": userId, "password": password};
-        http.Response response =
-            await http.post(headers: headers, url, body: jsonEncode(body));
+        http.Response response = await http
+            .post(headers: headers, url, body: jsonEncode(body))
+            .timeout(const Duration(seconds: 15));
+
         if (response.statusCode == 200) {
           var tokenResponse = jsonDecode(response.body);
           if (tokenResponse['code'] == 200) {
@@ -50,6 +55,15 @@ class LoginController extends GetxController {
           popUpLoginField();
         }
       }
+    } on SocketException {
+      PopupHelper.showCenterDialog(
+          "Koneksi Bermasalah", "Gagal tersambung ke server.");
+    } on TimeoutException {
+      PopupHelper.showCenterDialog(
+          "Request Timeout", "Permintaan terlalu lama, coba lagi.");
+    } on FormatException {
+      PopupHelper.showCenterDialog(
+          "Data Error", "Format response tidak valid.");
     } catch (error) {
       isLoading(false);
       operationField(massageError: error.toString());
@@ -84,7 +98,7 @@ class LoginController extends GetxController {
             //======================= Menyimpan Data preference Login ======================================
 
             if (getDetaiUser.peranan == 'General Manager') {
-              createBm(userIdBm: getDetaiUser.userid);
+              createTicketBm(userIdBm: getDetaiUser.userid);
             } else {
               SharedPreferences clearprefs =
                   await SharedPreferences.getInstance();
@@ -102,20 +116,26 @@ class LoginController extends GetxController {
             popUpLoginSucessMaker(userId: userId); //PopUp
 
             Navigator.of(Get.context!).pop();
+            FocusScope.of(Get.context!).unfocus();
+            print('Pindah halaman berhasil');
+            print(connectionResult);
             // Get.offAll(const LandingPageMaker());
           } else {
             popUpLoginField();
           }
         }
       }
+    } on SocketException {
+      PopupHelper.showCenterDialog(
+          "Koneksi Bermasalah", "Gagal tersambung ke server.");
+    } on TimeoutException {
+      PopupHelper.showCenterDialog(
+          "Request Timeout", "Permintaan terlalu lama, coba lagi.");
+    } on FormatException {
+      PopupHelper.showCenterDialog(
+          "Data Error", "Format response tidak valid.");
     } catch (error) {
       operationField(massageError: error.toString());
     }
   }
-}
-
-void createBm({String? userIdBm}) async {
-  SharedPreferences getDataUser = await SharedPreferences.getInstance();
-  String bmTiket = await createTicketBm(userId: userIdBm);
-  await getDataUser.setString('bmtiket', bmTiket);
 }

@@ -44,14 +44,13 @@ class SplashScreenController extends GetxController {
     isLogin = prefs.getBool('isLogin') ?? false;
 
     Future.delayed(const Duration(seconds: 3), () {
-      if (isLogin == true) {
-        // User sudah login, redirect ke halaman utama
-        Get.offAllNamed('/home',
-            arguments: login); // ganti sesuai route halaman utama
-      } else {
-        // User belum login, redirect ke LoginPage
-        Get.offAllNamed('/login', arguments: login);
-      }
+      Get.offAllNamed('/login', arguments: login);
+      // if (isLogin == true) {
+      //   // Get.offAllNamed('/home', arguments: login);
+      // } else {
+      //   // User belum login, redirect ke LoginPage
+      //   Get.offAllNamed('/login', arguments: login);
+      // }
     });
   }
 }

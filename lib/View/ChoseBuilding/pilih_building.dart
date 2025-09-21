@@ -36,12 +36,6 @@ class _PilihbuildingState extends State<Pilihbuilding> {
               if (value != null) {
                 controller.chooseBuilding(value);
               }
-              // setState(() {
-              //   selectedValue = value;
-              // });
-              // controller.chooseBuilding(value);
-              // // await saveBaseUrl(
-              // //     nameBuilding: '${value?.name}', baseUrl: '${value?.baseUrl}');
             },
           )),
         ],

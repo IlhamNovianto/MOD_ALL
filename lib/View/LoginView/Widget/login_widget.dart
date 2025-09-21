@@ -78,7 +78,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                               loginController.passwordController.text;
 
                           // Menghilangkan fokus dari TextField
-                          FocusScope.of(context).unfocus();
+                          // FocusScope.of(context).unfocus();
 
                           // Lakukan aksi login
                           loginController.getToken(
