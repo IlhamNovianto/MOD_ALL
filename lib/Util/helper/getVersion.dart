@@ -1,15 +1,17 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:manager_on_duty/Util/CheckConnection.dart';
 import 'package:manager_on_duty/Util/Popup/GagalFunction.dart';
+import 'package:manager_on_duty/Util/helper/check_conection.dart';
 import 'package:manager_on_duty/View/SplashScreen/SplashScreen_Controller.dart';
 
-import '../Service/Api_EndPoint.dart';
-import 'Popup/CekKoneksi.dart';
+import '../../Service/api_endpoint.dart';
+import '../Popup/CekKoneksi.dart';
+import '../Popup/helperAuth.dart';
 
 Future<void> getVersionApps({required String versionAPP}) async {
   try {
@@ -24,7 +26,9 @@ Future<void> getVersionApps({required String versionAPP}) async {
       var url = Uri.parse(
           '$connectionResult${ApiEndPoints.getversion.version}?idv=$encodedVersion');
 
-      http.Response responseVersion = await http.get(headers: head, url);
+      http.Response responseVersion = await http
+          .get(headers: head, url)
+          .timeout(const Duration(seconds: 15));
 
       if (responseVersion.statusCode == 200) {
         var responseBody = jsonDecode(responseVersion.body);
@@ -36,6 +40,14 @@ Future<void> getVersionApps({required String versionAPP}) async {
         }
       }
     }
+  } on SocketException {
+    PopupHelper.showCenterDialog(
+        "Koneksi Bermasalah", "Gagal tersambung ke server.");
+  } on TimeoutException {
+    PopupHelper.showCenterDialog(
+        "Request Timeout", "Permintaan terlalu lama, coba lagi.");
+  } on FormatException {
+    PopupHelper.showCenterDialog("Data Error", "Format response tidak valid.");
   } catch (e) {
     operationField(massageError: e.toString());
   }
@@ -73,8 +85,6 @@ void updateWarning() async {
               ),
               child: const Text('OK'),
               onPressed: () {
-                // downloadApk(context);
-
                 exit(0);
               },
             ),

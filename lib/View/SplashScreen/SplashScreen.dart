@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_on_duty/View/SplashScreen/SplashScreen_Controller.dart';
 
+import '../../Config/Pilih Build/dataBuild.dart';
+
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  final LocationItem building;
+  const SplashScreen({super.key, required this.building});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -12,6 +15,8 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   SplashScreenController splashScreenController =
       Get.put(SplashScreenController());
+
+  // final PilihBuildingController buildingController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -22,20 +27,31 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Scaffold(
               backgroundColor: Colors.white,
               body: Center(
-                child: Container(
-                  height: 150,
-                  width: 150,
-                  decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('images/LogoMod.png'),
-                          fit: BoxFit.scaleDown)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 150,
+                      width: 150,
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('images/LogoMod.png'),
+                              fit: BoxFit.scaleDown)),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text('For Building : '),
+                    Container(
+                        color: Colors.white,
+                        height: 100,
+                        width: 220,
+                        child: Image.asset(widget.building.imgLogoBuilding
+                            // widget.building.imgLogoBuilding,
+                            )),
+                  ],
                 ),
               ),
-              bottomSheet: Container(
-                  color: Colors.white,
-                  height: 70,
-                  width: 140,
-                  child: Image.asset('images/gca2Logo.png')),
             ),
           );
         });

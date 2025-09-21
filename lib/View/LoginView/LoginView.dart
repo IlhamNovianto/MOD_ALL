@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:manager_on_duty/Config/Pilih%20Build/dataBuild.dart';
+import 'package:manager_on_duty/View/ChoseBuilding/pilih_building.dart';
 import 'package:manager_on_duty/View/SplashScreen/SplashScreen_Controller.dart';
 
 import 'Widget/login_widget.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final LocationItem login;
+  const LoginPage({super.key, required this.login});
+  // const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -19,9 +23,9 @@ class _LoginPageState extends State<LoginPage> {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('images/GCA2.jpg'),
+                  image: AssetImage(widget.login.imgBackground),
                   fit: BoxFit.fill,
                   colorFilter: ColorFilter.mode(
                       Color.fromARGB(47, 68, 137, 255), BlendMode.color))),
@@ -51,14 +55,16 @@ class _LoginPageState extends State<LoginPage> {
                                   SizedBox(
                                       height: 100,
                                       width: 200,
-                                      child:
-                                          Image.asset('images/gca2Logo.png')),
+                                      child: Image.asset(
+                                          widget.login.imgLogoBuilding)),
                                   const Padding(
                                     padding: EdgeInsets.symmetric(
                                       horizontal: 20,
                                     ),
                                     child: LoginWidget(),
                                   ),
+                                  // Pilih Ulang Building
+                                  Text(widget.login.baseUrl),
                                   Text(
                                       'Version.${splashScreenController.versionAPP}')
                                 ],
@@ -67,6 +73,15 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(
                         height: 5,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Get.offAll(const Pilihbuilding());
+                        },
+                        child: const Text(
+                          "← Kembali ke Pilih Building",
+                          style: TextStyle(color: Colors.blue, fontSize: 18),
+                        ),
                       ),
                     ]),
               ),

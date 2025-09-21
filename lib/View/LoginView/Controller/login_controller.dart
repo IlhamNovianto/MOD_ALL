@@ -3,15 +3,15 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:manager_on_duty/Service/Api_EndPoint.dart';
-import 'package:manager_on_duty/Util/CheckConnection.dart';
+import 'package:manager_on_duty/Service/api_endpoint.dart';
 import 'package:manager_on_duty/Util/Popup/CekKoneksi.dart';
 import 'package:manager_on_duty/Util/Popup/GagalFunction.dart';
+import 'package:manager_on_duty/Util/helper/check_conection.dart';
 import 'package:manager_on_duty/View/LoginView/Model/login_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../Util/UserPreference/user_preference.dart';
-import '../../../Util/createTicket.dart';
+import '../../../Service/UserPreference/user_preference.dart';
+import '../../../Util/helper/createTicket.dart';
 import '../PopUp/akunTidakDitemukan.dart';
 import '../PopUp/berhasilMasuk.dart';
 

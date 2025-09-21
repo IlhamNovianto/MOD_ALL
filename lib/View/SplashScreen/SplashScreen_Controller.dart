@@ -1,9 +1,8 @@
 import 'package:get/get.dart';
-import 'package:manager_on_duty/Util/getVersion.dart';
+import 'package:manager_on_duty/Config/Pilih%20Build/dataBuild.dart';
+import 'package:manager_on_duty/Util/helper/getVersion.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../ChoseBuilding/PilihBuilding.dart';
 
 class SplashScreenController extends GetxController {
   late SharedPreferences prefs;
@@ -16,9 +15,14 @@ class SplashScreenController extends GetxController {
   String? versionAPP;
   String? buildNumber;
 
+  // 🟢 ini untuk simpan argument dari PilihBuildingController
+  late LocationItem login;
+
   @override
   void onInit() async {
-    // redirectPage();
+    // ambil argument dari route
+    login = Get.arguments as LocationItem;
+
     _getAppVersion();
     super.onInit();
   }
@@ -36,11 +40,18 @@ class SplashScreenController extends GetxController {
   }
 
   void redirectPage() async {
-    //SharedPreferences clearprefs = await SharedPreferences.getInstance();
+    prefs = await SharedPreferences.getInstance();
+    isLogin = prefs.getBool('isLogin') ?? false;
 
     Future.delayed(const Duration(seconds: 3), () {
-      Get.off(const Pilihbuilding());
-      // Get.off(const LoginPage());
+      if (isLogin == true) {
+        // User sudah login, redirect ke halaman utama
+        Get.offAllNamed('/home',
+            arguments: login); // ganti sesuai route halaman utama
+      } else {
+        // User belum login, redirect ke LoginPage
+        Get.offAllNamed('/login', arguments: login);
+      }
     });
   }
 }
