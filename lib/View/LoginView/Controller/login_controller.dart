@@ -116,7 +116,7 @@ class LoginController extends GetxController {
             popUpLoginSucessMaker(userId: userId); //PopUp
 
             Navigator.of(Get.context!).pop();
-            FocusScope.of(Get.context!).unfocus();
+            //FocusScope.of(Get.context!).unfocus();
             print('Pindah halaman berhasil');
             print(connectionResult);
             // Get.offAll(const LandingPageMaker());
