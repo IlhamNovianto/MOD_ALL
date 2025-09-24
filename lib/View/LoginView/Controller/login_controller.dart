@@ -10,6 +10,7 @@ import 'package:manager_on_duty/Util/Popup/CekKoneksi.dart';
 import 'package:manager_on_duty/Util/Popup/error/GagalFunction.dart';
 import 'package:manager_on_duty/Util/Popup/helperAuth.dart';
 import 'package:manager_on_duty/Util/helper/check_conection.dart';
+import 'package:manager_on_duty/View/LandingPage/landing_page.dart';
 import 'package:manager_on_duty/View/LoginView/Model/login_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -119,7 +120,7 @@ class LoginController extends GetxController {
             //FocusScope.of(Get.context!).unfocus();
             print('Pindah halaman berhasil');
             print(connectionResult);
-            // Get.offAll(const LandingPageMaker());
+            Get.offAll(const LandingPageMaker());
           } else {
             popUpLoginField();
           }

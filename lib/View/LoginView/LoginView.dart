@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
               image: DecorationImage(
                   image: AssetImage(widget.login.imgBackground),
                   fit: BoxFit.fill,
-                  colorFilter: ColorFilter.mode(
+                  colorFilter: const ColorFilter.mode(
                       Color.fromARGB(47, 68, 137, 255), BlendMode.color))),
           child: Center(
             child: Padding(
