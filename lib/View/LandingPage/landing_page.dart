@@ -84,7 +84,7 @@ class _LandingPageMakerState extends State<LandingPageMaker> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  // cekSession();
+                                  //cekSession();
                                 },
                                 child: Container(
                                   width: 150,
@@ -151,7 +151,7 @@ class _LandingPageMakerState extends State<LandingPageMaker> {
                               InkWell(
                                 onTap: () {
                                   // Pindah Halaman
-                                  //  Get.to(const HistorymodPage());
+                                  //Get.to(const HistorymodPage());
                                 },
                                 child: Container(
                                   width: 150,
@@ -178,7 +178,7 @@ class _LandingPageMakerState extends State<LandingPageMaker> {
                                             child: ElevatedButton(
                                           onPressed: () {
                                             // Pindah Halaman
-                                            // Get.to(const HistorymodPage());
+                                            //Get.to(const HistorymodPage());
                                           },
                                           style: ElevatedButton.styleFrom(
                                             backgroundColor: Colors.blue,
@@ -329,7 +329,7 @@ void menuX() {
                         style: TextStyle(color: Colors.white),
                       ),
                       onPressed: () {
-                        // Get.to(const GmPage());
+                        //Get.to(const GmPage());
                       },
                     ),
                   ),
